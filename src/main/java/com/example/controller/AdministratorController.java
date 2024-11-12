@@ -1,18 +1,24 @@
 package com.example.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.form.InsertAdministratorForm;
 import com.example.service.AdministratorService;
 
-@controller
+@Controller
 @RequestMapping("/")
 public class AdministratorController {
     
-    @Autowirerd
+    @Autowired
     private AdministratorService administratorService;
 
-    public String toInsert(InsertAdministratorForm form){
+    @GetMapping("/toInsert")
+    public String toInsert(InsertAdministratorForm form, Model model){
+        return "administrator/insert";
         
     }
     
