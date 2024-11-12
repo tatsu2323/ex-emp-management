@@ -41,7 +41,8 @@
             <!-- ここから上を編集する必要はありません -->
 
             <!-- ここにモックのform要素を貼り付けます -->
-            <form method="post" action="login.html">
+            <form method="post" th:action="@{/insert}"
+             th:object="${insertAdministratorForm}" >
               <fieldset>
                 <legend>
                   管理者登録<br />(システムにログインできる管理者を登録します)
@@ -54,7 +55,7 @@
                       <label class="error-messages">
                         氏名を入力してください
                       </label>
-                      <input
+                      <input th:field="*{name}"
                         type="text"
                         name="name"
                         id="name"
@@ -73,6 +74,7 @@
                         メールアドレスを入力してください
                       </label>
                       <input
+                        th:field="*{mailAddress}"
                         type="text"
                         name="mailAddress"
                         id="mailAddress"
@@ -91,6 +93,7 @@
                         パスワードを入力してください
                       </label>
                       <input
+                        th:field="*{password}"
                         type="password"
                         name="password"
                         id="password"

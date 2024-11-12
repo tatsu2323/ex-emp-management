@@ -20,7 +20,7 @@ public class AdministratorRepository {
         Administrator administrator = new Administrator();
         administrator.setId(rs.getInt("id"));
         administrator.setName(rs.getString("name"));
-        administrator.setMailAddres(rs.getString("mail_address"));
+        administrator.setMailAddress(rs.getString("mail_address"));
         administrator.setPassword(rs.getString("password"));
         return administrator;
     };
@@ -34,13 +34,10 @@ public class AdministratorRepository {
     public void save(Administrator administrator) {
 
         SqlParameterSource param = new BeanPropertySqlParameterSource(administrator);
-
         if (administrator.getId() == null) {
-            String sqlInsert = "INSERT INTO administrators(id,name,mail_address,password)"
-                    + " VALUES (:id,:name,:mailAddress,:password)";
-
+            String sqlInsert = "INSERT INTO administrators(name, mail_address, password)"
+                    + " VALUES(:name,:mailAddress,:password)";
             template.update(sqlInsert, param);
-
         } else {
             String upDateSql = "UPDATE administrators SET id=:id,name=:name,mail_address=:mailAddress,password=:password";
             template.update(upDateSql, param);
@@ -60,10 +57,7 @@ public class AdministratorRepository {
         List<Administrator> administratorList = template.query(findAllSql, param, ADMINISTRATOR_ROW_MAPPER);
         if (administratorList.size() == 0) {
             return null;
-
         }
-
         return administratorList;
-
     }
 }
