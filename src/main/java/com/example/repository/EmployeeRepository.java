@@ -28,14 +28,14 @@ public class EmployeeRepository {
         employee.setName(rs.getString("name"));
         employee.setImage(rs.getString("image"));
         employee.setGender(rs.getString("gender"));
-        employee.setHireDate(rs.getTimestamp("hire_date"));
-        employee.setMailAddres(rs.getString("mailAddres"));
+        employee.setHireDate(rs.getDate("hire_date"));
+        employee.setMailAddres(rs.getString("mail_address"));
         employee.setZipCode(rs.getString("zip_code"));
         employee.setAddress(rs.getString("address"));
         employee.setTelephone(rs.getString("telephone"));
         employee.setSalary(rs.getInt("salary"));
-        employee.setCharacterristics(rs.getString("characterristics"));
-        employee.setDepartmentsCount(rs.getInt("departmentsCount"));
+        employee.setCharacterristics(rs.getString("characteristics"));
+        employee.setDepartmentsCount(rs.getInt("dependents_count"));
         return employee;
     };
 
@@ -50,14 +50,14 @@ public class EmployeeRepository {
         SqlParameterSource param = new BeanPropertySqlParameterSource(employee);
 
         if (employee.getId() == null) {
-            String sqlInsert = "INSERT INTO employees(id, name, image, gender, hire_date, mailAddres,"
-                                + " zipCode, address, telephone, salary, characterristics,departmentsCount)"
-                                + " VALUES (id, name, image, gender, hire_date, mailAddres, zipCode, address, telephone, salary, characterristics,departmentsCount)";
+            String sqlInsert = "INSERT INTO employees(name, image, gender, hire_date, mail_address,"
+                                + " zip_code, address, telephone, salary, characteristics,dependents_count)"
+                                + " VALUES (:name, :image, :gender, :hire_date, :mailAddres, :zipCode, :address, :telephone, :salary, :characterristics,:departmentsCount)";
 
             template.update(sqlInsert, param);
 
         } else {
-            String upDateSql = "UPDATE employees SET name=:name, image=:image, gender=:gender, hire_date=hireDate, mailAddres=:mailAddress zipCode=:zipCode, address=:Address, telephone=:telephone, salary=:salary, characterristics=:characterristicc,departmentsCount=:departmentsCount "
+            String upDateSql = "UPDATE employees SET name=:name, image=:image, gender=:gender, hire_date=hireDate, mail_address=:mailAddress zip_code=:zipCode, address=:Address, telephone=:telephone, salary=:salary, characteristics=:characterristicc,dependents_count=:departmentsCount "
                                + " WHERE id =:id";
             template.update(upDateSql, param);
         }
@@ -68,15 +68,11 @@ public class EmployeeRepository {
      * 全権検索をする
      */
 
-    public List<Employee> findAll(Employee employee) {
-        String findAllSql = "SELECT id, name, image, gender, hire_date, mailAddres, zipCode, address, telephone, salary, characterristics,departmentsCount FROM employees ";
-         
-        SqlParameterSource param = new BeanPropertySqlParameterSource(employee);
-
-        List<Employee> employeeList = template.query(findAllSql, param, EMPLOYEE_ROW_MAPPER);
+    public List<Employee> findAll() {
+        String findAllSql = "SELECT id, name, image, gender, hire_date, mail_address, zip_code, address, telephone, salary, characteristics,dependents_count FROM employees";
+        List<Employee> employeeList = template.query(findAllSql,EMPLOYEE_ROW_MAPPER);
         if (employeeList.size() == 0) {
             return null;
-            
         }
         return employeeList;
 
@@ -87,7 +83,7 @@ public class EmployeeRepository {
      */
 
      public Employee load(Integer id){
-        String loadSql ="SELECT id, name, image, gender, hire_date, mailAddres, zipCode, address, telephone, salary, characterristics,departmentsCount FROM employees WHERE id =:id";
+        String loadSql ="SELECT id, name, image, gender, hire_date, mail_address, zip_code, address, telephone, salary, characteristics,dependents_count FROM employees WHERE id =:id";
         SqlParameterSource param = new MapSqlParameterSource().addValue("id",id);
         Employee employee = template.queryForObject(loadSql,param,EMPLOYEE_ROW_MAPPER);
         return employee;
