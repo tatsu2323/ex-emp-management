@@ -23,12 +23,22 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     /**
-     * @param 従業員情報を全権取得する
-     * @return EmployeeList
+     * @param 従業員情報を全件取得する
+     * @return employeeList
      */
     public List<Employee> showList() {
         List<Employee> employeeList = employeeRepository.findAll();
         return employeeList;
+    }
+
+    /**
+     * @param　従業員詳細リストを取得する
+     * @return emploee
+     */
+    public Employee showDatail(Integer id){
+       Employee employee = employeeRepository.load(id);
+       return employee;
+
     }
 
 }
