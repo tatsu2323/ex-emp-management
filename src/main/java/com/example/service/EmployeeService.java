@@ -41,4 +41,13 @@ public class EmployeeService {
 
     }
 
+    /**
+     * @param 従業員の扶養情報を更新する
+     * 
+     */
+
+     public void update(Employee employee){
+        employeeRepository.save(employee);
+     }
+
 }

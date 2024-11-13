@@ -52,12 +52,12 @@ public class EmployeeRepository {
         if (employee.getId() == null) {
             String sqlInsert = "INSERT INTO employees(name, image, gender, hire_date, mail_address,"
                                 + " zip_code, address, telephone, salary, characteristics,dependents_count)"
-                                + " VALUES (:name, :image, :gender, :hire_date, :mailAddres, :zipCode, :address, :telephone, :salary, :characterristics,:departmentsCount)";
+                                + " VALUES (:name, :image, :gender, :hireDate, :mailAddres, :zipCode, :address, :telephone, :salary, :characterristics,:departmentsCount)";
 
             template.update(sqlInsert, param);
 
         } else {
-            String upDateSql = "UPDATE employees SET name=:name, image=:image, gender=:gender, hire_date=hireDate, mail_address=:mailAddress zip_code=:zipCode, address=:Address, telephone=:telephone, salary=:salary, characteristics=:characterristicc,dependents_count=:departmentsCount "
+            String upDateSql = "UPDATE employees SET name=:name, image=:image, gender=:gender, hire_date=:hireDate, mail_address=:mailAddres, zip_code=:zipCode, address=:Address, telephone=:telephone, salary=:salary, characteristics=:characterristics,dependents_count=:departmentsCount "
                                + " WHERE id =:id";
             template.update(upDateSql, param);
         }
