@@ -21,12 +21,21 @@ public class AdministratorController {
     
     @Autowired
     private AdministratorService administratorService;
-
+    /**
+     * 
+     * @param form
+     * @return
+     */
     @GetMapping("/toInsert")
     public String toInsert(InsertAdministratorForm form){
         return "administrator/insert";
     }
 
+    /**
+     * 
+     * @param 
+     * @return
+     */
     @PostMapping("/insert")
     public String insert(InsertAdministratorForm form){
         System.out.println(form);
@@ -48,6 +57,12 @@ public class AdministratorController {
     @Autowired
     private HttpSession session;
     
+    /**
+     * 
+     * @param ログインするメソッド
+     * @param model
+     * @return
+     */
     @PostMapping("/login")
     public String login(LoginForm form, Model model){
         Administrator administrator = administratorService.login(form.getMailAddress(),form.getPassword());
@@ -61,7 +76,19 @@ public class AdministratorController {
         session.setAttribute("administratorName", administrator.getName());
         return "redirect:/employee/showList";
           
-
         }
+
+        /**
+         * 
+         * @param ログアウトするメソッド
+         * @return
+         */
+        @GetMapping("/logout")
+        public String logout(LoginForm form){
+            session.invalidate();
+            return "redirect:/";
+        }
+
+
 
 }

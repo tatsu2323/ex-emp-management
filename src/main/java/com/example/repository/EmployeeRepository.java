@@ -69,7 +69,7 @@ public class EmployeeRepository {
      */
 
     public List<Employee> findAll() {
-        String findAllSql = "SELECT id, name, image, gender, hire_date, mail_address, zip_code, address, telephone, salary, characteristics,dependents_count FROM employees";
+        String findAllSql = "SELECT id, name, image, gender, hire_date, mail_address, zip_code, address, telephone, salary, characteristics,dependents_count FROM employees ORDER BY hire_date DESC";
         List<Employee> employeeList = template.query(findAllSql,EMPLOYEE_ROW_MAPPER);
         if (employeeList.size() == 0) {
             return null;
