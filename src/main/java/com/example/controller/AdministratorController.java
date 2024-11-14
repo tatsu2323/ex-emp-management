@@ -11,7 +11,6 @@ import com.example.domain.Administrator;
 import com.example.form.InsertAdministratorForm;
 import com.example.form.LoginForm;
 import com.example.service.AdministratorService;
-
 import jakarta.servlet.http.HttpSession;
 
 
@@ -42,8 +41,9 @@ public class AdministratorController {
         Administrator administrator = new Administrator();
         BeanUtils.copyProperties(form, administrator); 
         administratorService.insert(administrator);
-        return "redirect:/toinsert/";
+        return "redirect:/";
     }
+    
    /**
     * ログイン情報画面に遷移する
     * @param form
@@ -63,6 +63,7 @@ public class AdministratorController {
      * @param model
      * @return
      */
+    
     @PostMapping("/login")
     public String login(LoginForm form, Model model){
         Administrator administrator = administratorService.login(form.getMailAddress(),form.getPassword());
@@ -88,7 +89,4 @@ public class AdministratorController {
             session.invalidate();
             return "redirect:/";
         }
-
-
-
 }

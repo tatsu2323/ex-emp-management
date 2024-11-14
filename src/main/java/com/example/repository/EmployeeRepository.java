@@ -1,7 +1,6 @@
 package com.example.repository;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -17,10 +16,6 @@ public class EmployeeRepository {
 
     @Autowired
     private NamedParameterJdbcTemplate template;
-
-    // Integer id, String name, String image, String gender, Date hire_date, String mailAddres,
-    //         String zipCode, String address, String telephone, Integer salary, String characterristics,
-    //         Integer deparmentsCount
 
     private static final RowMapper<Employee> EMPLOYEE_ROW_MAPPER = (rs, i) -> {
         Employee employee = new Employee();
